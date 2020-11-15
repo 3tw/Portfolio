@@ -1,0 +1,53 @@
+/* HTML & body*/
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  &.scroll-off {
+    overflow: hidden;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  .scroll-off {
+    overflow: hidden;
+  }
+}
+
+// Pass root box-sizing to all elements
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Other */
+
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+a:hover {
+  color: $text-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+b,
+strong {
+  // font-family: 'Arial-Bold';
+}
+
+.icon {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+ul {
+  list-style: none;
+}
