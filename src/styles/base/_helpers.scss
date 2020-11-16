@@ -2,7 +2,7 @@
 
 .container {
   @include container-padding;
-  @include margin-center;
+  @include center-margin;
   width: 100%;
   max-width: $container-max-width;
 }
