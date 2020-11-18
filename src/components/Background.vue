@@ -79,7 +79,7 @@ export default {
     cursor: pointer;
     animation-name: dotPulse;
     animation-iteration-count: infinite;
-    animation-duration: 0.6s;
+    animation-duration: 0.7s;
     animation-timing-function: ease-in-out;
     animation-play-state: running;
     animation-direction: alternate;
@@ -88,18 +88,21 @@ export default {
     }
   }
   &.passive {
+    z-index: 9999;
     cursor: pointer;
     border-width: 20px;
     animation-name: largeDotShrink, dotPulse;
-    animation-duration: 3s, 0.6s;
+    animation-duration: 3s, 0.7s;
     animation-delay: 0s, 3.2s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     animation-play-state: running;
     animation-direction: normal, alternate;
     animation-iteration-count: 1, infinite;
+    transition: z-index 4s step-end;
   }
   &.active {
+    z-index: 0;
     animation-name: largeDotExpand;
     animation-fill-mode: forwards;
     animation-duration: 0.8s;
@@ -184,7 +187,7 @@ export default {
   }
 
   90% {
-    border-width: 25px;
+    border-width: 30px;
   }
 
   to {
@@ -198,7 +201,7 @@ export default {
   }
 
   to {
-    border-width: 25px;
+    border-width: 30px;
   }
 }
 </style>
