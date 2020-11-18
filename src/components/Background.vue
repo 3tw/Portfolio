@@ -30,14 +30,6 @@ export default {
       dotState: 'initial-state'
     }
   },
-  // computed: {
-  //   dotOneState: function () {
-  //     return this.dotOneSize + ' ' + this.dotClicked
-  //   },
-  //   dotTwoState: function () {
-  //     return this.dotTwoSize + ' ' + this.dotClicked
-  //   }
-  // },
   methods: {
     toggleDotState: function (dotSize) {
       if (this.dotState === 'passive' || this.dotState === 'initial-state') {
@@ -83,6 +75,7 @@ export default {
   border-color: $bg-color;
   box-shadow: 0 0 2px 2px #fff;
   &.initial-state {
+    z-index: 9999;
     cursor: pointer;
     animation-name: dotPulse;
     animation-iteration-count: infinite;
@@ -143,7 +136,7 @@ export default {
   position: absolute;
   z-index: 50;
   top: 20px;
-  left: 20px;
+  right: 20px;
   width: 5px;
   height: 5px;
   .dot-content {

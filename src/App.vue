@@ -1,16 +1,16 @@
 <template>
   <Background />
-  <HelloWorld />
+  <MainText />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainText from './components/MainText.vue'
 import Background from './components/Background.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    MainText,
     Background
   }
 }
@@ -18,9 +18,5 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
-
-#app {
-  text-align: center;
-  color: $text-color;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 </style>
