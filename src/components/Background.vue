@@ -4,6 +4,7 @@
 
       <span
         @click="toggleDotState('dot-large')"
+        @click.once="startTextAnimation()"
         :class=dotState
         class="dot dot-large"
       ></span>
@@ -31,6 +32,9 @@ export default {
     }
   },
   methods: {
+    startTextAnimation: function () {
+      this.$emit('animation-started', true)
+    },
     toggleDotState: function (dotSize) {
       if (this.dotState === 'passive' || this.dotState === 'initial-state') {
         this.dotState = 'active'
@@ -146,6 +150,10 @@ export default {
     position: relative;
     max-width: 5px;
     max-height: 5px;
+  }
+  @include breakpoint-up(md) {
+    top: 40px;
+    right: 40px;
   }
 }
 

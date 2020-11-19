@@ -2,14 +2,14 @@
   <div class="main-wrap">
     <div class="container">
 
-      <span>This can be short</span>
-      <span class="break"> very very short</span>
-      <span class="break">presenation</span>
+      <span :class="[openingTextStatus, 'target delayed-initial']">{{ openingText01 }}</span>
+      <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText02 }}</span>
+      <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText03 }}</span>
 
       <!-- <span class="break">or </span> -->
       <span
         @click="targetStatus01 = 'show'"
-        class="trigger"
+        :class="[openingTextStatus, 'trigger target break delayed-3 animation-slow']"
       >{{trigger01}}</span>
 
       <span class="spacer"></span>
@@ -18,14 +18,14 @@
 
       <span
         @click="targetStatus02 = 'show'"
-        :class="[targetStatus01, 'target trigger']"
+        :class="[targetStatus01, 'trigger target']"
       >{{target01_1}}</span>
       <span :class="[targetStatus01, 'target']">{{ target01_2 }}</span>
       <span :class="[targetStatus01, 'target delayed-1']">{{ target01_2p1 }}</span>
       <span :class="[targetStatus01, 'target delayed-2']">{{ target01_2p2 }}</span>
 
       <span
-        :class="[targetStatus01, 'target delayed-1 trigger']"
+        :class="[targetStatus01, 'trigger target delayed-1']"
         @click="targetStatus03 = 'show'"
       >{{ target01_3 }}</span>
 
@@ -40,12 +40,19 @@
 <script>
 export default {
   name: 'MainText',
+  props: {
+    animationTriggered: Boolean
+  },
   data () {
     return {
+      openingTextStatus: 'hidden',
       targetStatus01: 'hidden',
       targetStatus02: 'hidden',
       targetStatus03: 'hidden',
 
+      openingText01: 'This can be short ',
+      openingText02: 'very very short',
+      openingText03: 'presentation',
       trigger01: ' or not. ',
 
       target01_1: 'I ',
@@ -58,7 +65,10 @@ export default {
       target01_4: 'Oro gracius et tu. '
     }
   },
-  methods: {
+  watch: {
+    animationTriggered: function () {
+      this.openingTextStatus = this.animationTriggered ? 'show' : 'hidden'
+    }
   }
 }
 
@@ -86,6 +96,9 @@ span {
 .break {
   display: block;
 }
+.target.break {
+  display: flex;
+}
 
 .spacer {
   height: 1.5rem;
@@ -99,7 +112,7 @@ span {
   cursor: pointer;
 }
 
-/* Animation target*/
+/* Animation target */
 
 // Credits for creating this animation go to Mattia Astorino
 // https://codepen.io/equinusocio/details/PoNYGGX
@@ -117,20 +130,10 @@ span {
 .target.show,
 .target.show::after {
   animation-duration: 1.2s;
-  animation-delay: 0.8s;
+  animation-delay: 0.6s;
   animation-fill-mode: both;
   animation-iteration-count: 1;
   animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-.target.show {
-  &.delayed-1,
-  &.delayed-1::after {
-    animation-delay: 2s;
-  }
-  &.delayed-2,
-  &.delayed-2::after {
-    animation-delay: 2.8s;
-  }
 }
 
 .target.show {
@@ -184,6 +187,37 @@ span {
 
   100% {
     transform: scaleX(0);
+  }
+}
+
+/* Animation helpers */
+
+.target.show {
+  &.delayed-initial,
+  &.delayed-initial::after {
+    animation-delay: 1s;
+  }
+  &.delayed-1,
+  &.delayed-1::after {
+    animation-delay: 2s;
+  }
+  &.delayed-2,
+  &.delayed-2::after {
+    animation-delay: 2.8s;
+  }
+  &.delayed-3,
+  &.delayed-3::after {
+    animation-delay: 3.8s;
+  }
+  &.delayed-4,
+  &.delayed-4::after {
+    animation-delay: 4.8s;
+  }
+}
+
+.target.show {
+  &.animation-slow::after {
+    animation-duration: 1.8s;
   }
 }
 </style>
