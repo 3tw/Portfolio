@@ -103,7 +103,7 @@ export default {
     animation-play-state: running;
     animation-direction: normal, alternate;
     animation-iteration-count: 1, infinite;
-    transition: z-index 4s step-end;
+    transition: z-index 3s step-end;
   }
   &.active {
     z-index: 0;
