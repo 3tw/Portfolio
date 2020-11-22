@@ -1,11 +1,15 @@
 module.exports = {
   root: true,
   env: {
+    browser: true,
     node: true
   },
-  extends: ['plugin:vue/vue3-essential', '@vue/standard'],
+  extends: ["plugin:vue/essential", "@vue/prettier"],
+  plugins: ["vue"],
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: "babel-eslint",
+    ecmaVersion: 2019,
+    sourceType: "module"
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

@@ -1,6 +1,9 @@
 <template>
   <div class="background-wrap">
-    <div class="background-content">
+    <div
+      class="background-content"
+      :class=dotState
+    >
 
       <span
         @click="toggleDotState('dot-large')"
@@ -62,6 +65,9 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  &.passive {
+    z-index: 9999;
+  }
 }
 
 .dot {
@@ -88,7 +94,7 @@ export default {
     animation-play-state: running;
     animation-direction: alternate;
     &:hover::before {
-      content: "";
+      content: '';
     }
   }
   &.passive {

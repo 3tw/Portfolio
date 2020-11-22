@@ -1,6 +1,8 @@
 <template>
-  <Background @animation-started="startTextAnimation($event)" ></Background>
-  <MainText :animationTriggered="textAnimationStarted"/>
+  <div>
+    <Background @animation-started="startTextAnimation($event)" />
+    <MainText :animationTriggered="textAnimationStarted" />
+  </div>
 </template>
 
 <script>
@@ -27,6 +29,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 </style>

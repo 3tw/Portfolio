@@ -6,7 +6,6 @@
       <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText02 }}</span>
       <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText03 }}</span>
 
-      <!-- <span class="break">or </span> -->
       <span
         @click="targetStatus01 = 'show'"
         :class="[openingTextStatus, 'trigger target break delayed-3 animation-slow']"
@@ -45,6 +44,7 @@ export default {
   },
   data () {
     return {
+      user: '',
       openingTextStatus: 'hidden',
       targetStatus01: 'hidden',
       targetStatus02: 'hidden',
@@ -69,6 +69,12 @@ export default {
     animationTriggered: function () {
       this.openingTextStatus = this.animationTriggered ? 'show' : 'hidden'
     }
+  },
+  methods: {
+    getUser () {}
+  },
+  mounted () {
+    this.getUser()
   }
 }
 
@@ -108,7 +114,7 @@ span {
 /* Animation trigger */
 
 .trigger {
-  font-family: "Lora", serif;
+  font-family: 'Lora', serif;
   cursor: pointer;
 }
 
@@ -146,7 +152,7 @@ span {
   animation-name: clip-text;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 999;
     background-color: $text-color;
