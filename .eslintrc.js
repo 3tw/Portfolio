@@ -4,12 +4,10 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier"],
+  extends: ["plugin:vue/essential", "@vue/eslint-config-standard"],
   plugins: ["vue"],
   parserOptions: {
-    parser: "babel-eslint",
-    ecmaVersion: 2019,
-    sourceType: "module"
+    parser: "babel-eslint"
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

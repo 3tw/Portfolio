@@ -2,35 +2,37 @@
   <div class="main-wrap">
     <div class="container">
 
-      <span :class="[openingTextStatus, 'target delayed-initial']">{{ openingText01 }}</span>
-      <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText02 }}</span>
-      <span :class="[openingTextStatus, 'target break delayed-initial']">{{ openingText03 }}</span>
+      <!-- Paragrahp 1 -->
+
+      <span :class="[initText.status, 'target delayed-initial']">{{ initText.txt.p1 }}</span>
+      <span :class="[initText.status, 'target break delayed-initial']">{{ initText.txt.p2 }}</span>
+      <span :class="[initText.status, 'target break delayed-initial']">{{ initText.txt.p3 }}</span>
 
       <span
-        @click="targetStatus01 = 'show'"
-        :class="[openingTextStatus, 'trigger target break delayed-3 animation-slow']"
-      >{{trigger01}}</span>
+        @click="target01.status = 'show'"
+        :class="[initText.status, 'trigger target break delayed-3 animation-slow']"
+      >{{ initText.txt.p4 }}</span>
 
       <span class="spacer"></span>
 
-      <span :class="[targetStatus02, 'target']">{{ target02_1 }}</span>
+      <!-- Paragrahp 2 -->
+
+      <span :class="[ target02.status, 'target' ]">{{ target02.txt.p1 }}</span>
 
       <span
-        @click="targetStatus02 = 'show'"
-        :class="[targetStatus01, 'trigger target']"
-      >{{target01_1}}</span>
-      <span :class="[targetStatus01, 'target']">{{ target01_2 }}</span>
-      <span :class="[targetStatus01, 'target delayed-1']">{{ target01_2p1 }}</span>
-      <span :class="[targetStatus01, 'target delayed-2']">{{ target01_2p2 }}</span>
+        @click="target02.status = 'show'"
+        :class="[target01.status, 'trigger target']"
+      >{{ target01.txt.p1 }}</span>
+      <span :class="[target01.status, 'target']">{{ target01.txt.p2 }}</span>
+      <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p3 }}</span>
+      <span :class="[target01.status, 'target delayed-2']">{{ target01.txt.p4 }}</span>
 
       <span
-        :class="[targetStatus01, 'trigger target delayed-1']"
-        @click="targetStatus03 = 'show'"
-      >{{ target01_3 }}</span>
-
-      <span :class="[targetStatus03, 'target']">{{ target03_1 }}</span>
-
-      <span :class="[targetStatus01, 'target delayed-2']">{{ target01_4 }}</span>
+        :class="[target01.status, 'trigger target delayed-1']"
+        @click="target03.status = 'show'"
+      >{{ target01.txt.p5 }}</span>
+      <span :class="[target03.status, 'target']">{{ target02.txt.p5 }}</span>
+      <span :class="[target01.status, 'target delayed-2']">{{ target03.txt.p1 }}</span>
 
     </div>
   </div>
@@ -44,37 +46,88 @@ export default {
   },
   data () {
     return {
-      user: '',
-      openingTextStatus: 'hidden',
-      targetStatus01: 'hidden',
-      targetStatus02: 'hidden',
-      targetStatus03: 'hidden',
+      gitHubUser: 'https://api.github.com/users/3tw',
+      gitHubUserRepos: 'https://api.github.com/users/3tw/repos',
+      skills: {
+        languages: ['JavaScript', 'PHP', 'CSS', 'HTML'],
+        tools: ['Git', 'Sass', 'jQuery', 'Bootstrap', 'Laravel mix'],
+        frameworks: ['Vue.js', 'Laravel'],
+        cms: ['Wordpress, Twill']
+      },
+      bio: {
+        location: 'fetch'
+      },
+      links: {
+        gitHub: 'fetch'
+      },
+      starredRepos: {
 
-      openingText01: 'This can be short ',
-      openingText02: 'very very short',
-      openingText03: 'presentation',
-      trigger01: ' or not. ',
+      },
 
-      target01_1: 'I ',
-      target02_1: 'My name is Teo Winkler. ',
-      target01_2: 'am a ',
-      target01_2p1: 'frontend ',
-      target01_2p2: ' developer. ',
-      target01_3: 'Lorem ipsum arem. ',
-      target03_1: 'Minon firum sinun. ',
-      target01_4: 'Oro gracius et tu. '
+      initText: {
+        status: 'hidden',
+        txt: {
+          p1: 'This can be short ',
+          p2: 'very very short',
+          p3: 'presentation',
+          p4: 'or not.'
+        }
+      },
+
+      target01: {
+        status: 'hidden',
+        txt: {
+          p1: 'I',
+          p2: 'am',
+          p3: 'frontend',
+          p4: 'developer.',
+          p5: 'Neki neki'
+        }
+      },
+
+      target02: {
+        status: 'hidden',
+        txt: {
+          p1: 'My name is Teo Winkler. '
+        }
+      },
+
+      target03: {
+        status: 'hidden',
+        txt: {
+          p1: 'Odkrito'
+        }
+      }
     }
   },
   watch: {
     animationTriggered: function () {
-      this.openingTextStatus = this.animationTriggered ? 'show' : 'hidden'
+      this.initText.status = this.animationTriggered ? 'show' : 'hidden'
     }
   },
   methods: {
-    getUser () {}
+    getGitHubUser () {
+      fetch(this.gitHubUser)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.bio.location = data.location
+          this.links.gitHub = data.html_url
+        })
+        .catch(function () {})
+    },
+    getGitHubRepos () {
+      fetch(this.gitHubRepos)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+        })
+        .catch(function () {})
+    }
   },
   mounted () {
-    this.getUser()
+    this.getGitHubUser()
+    this.getGitHubRepos()
   }
 }
 
@@ -120,7 +173,7 @@ span {
 
 /* Animation target */
 
-// Credits for creating this animation go to Mattia Astorino
+// Credits for creating the core of this animation go to Mattia Astorino
 // https://codepen.io/equinusocio/details/PoNYGGX
 
 .target {
