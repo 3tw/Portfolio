@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap">
+  <div :class="animationState" class="main-wrap">
     <div class="container">
 
       <!-- Paragrahp 1 -->
@@ -42,7 +42,8 @@
 export default {
   name: 'MainText',
   props: {
-    animationTriggered: Boolean
+    animationTriggered: Boolean,
+    animationState: String
   },
   data () {
     return {
@@ -78,9 +79,9 @@ export default {
         status: 'hidden',
         txt: {
           p1: 'I',
-          p2: 'am',
+          p2: 'write',
           p3: 'frontend',
-          p4: 'developer.',
+          p4: 'code.',
           p5: 'Neki neki'
         }
       },
@@ -141,6 +142,10 @@ export default {
   line-height: 1.5rem;
   width: 100vw;
   text-align: left;
+  &.passive {
+    user-select: none;
+    pointer-events: none;
+  }
 }
 
 .container {

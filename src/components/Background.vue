@@ -1,9 +1,5 @@
 <template>
   <div class="background-wrap">
-    <div
-      class="background-content"
-      :class=dotState
-    >
 
       <span
         @click="toggleDotState('dot-large')"
@@ -22,7 +18,7 @@
 
         </div>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -38,12 +34,17 @@ export default {
     startTextAnimation: function () {
       this.$emit('animation-started', true)
     },
+    changeAnimationStatus: function (state) {
+      this.$emit('animation-status', state)
+    },
     toggleDotState: function (dotSize) {
       if (this.dotState === 'passive' || this.dotState === 'initial-state') {
         this.dotState = 'active'
+        this.changeAnimationStatus('active')
       } else if (this.dotState === 'active' && dotSize === 'dot-large') {
       } else {
         this.dotState = 'passive'
+        this.changeAnimationStatus('passive')
       }
     }
   }
@@ -59,15 +60,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: $text-color;
-}
-
-.background-content {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  &.passive {
-    z-index: 9999;
-  }
 }
 
 .dot {

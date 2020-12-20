@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Background @animation-started="startTextAnimation($event)" />
-    <MainText :animationTriggered="textAnimationStarted" />
+    <Background @animation-started="startTextAnimation($event)" @animation-status="recordAnimationState($event, state)" />
+    <MainText :animationTriggered="textAnimationStarted" :animationState="animationState" />
   </div>
 </template>
 
@@ -17,12 +17,16 @@ export default {
   },
   data () {
     return {
-      textAnimationStarted: false
+      textAnimationStarted: false,
+      animationState: 'passive'
     }
   },
   methods: {
     startTextAnimation: function (start) {
       this.textAnimationStarted = start === true
+    },
+    recordAnimationState: function (state) {
+      this.animationState = state
     }
   }
 }
