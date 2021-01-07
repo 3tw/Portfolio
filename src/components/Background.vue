@@ -1,23 +1,23 @@
 <template>
   <div class="background-wrap">
 
-      <span
-        @click="toggleDotState('dot-large')"
-        @click.once="startTextAnimation()"
-        :class=dotState
-        class="dot dot-large"
-      ></span>
+    <span
+      @click="toggleDotState('dot-large')"
+      @click.once="startTextAnimation()"
+      :class=dotState
+      class="dot dot-large"
+    ></span>
 
-      <div class="dot-wrap">
-        <div class="dot-content">
-          <span
-            @click="toggleDotState('dot-small')"
-            :class=dotState
-            class="dot dot-small"
-          ></span>
+    <div class="dot-wrap">
+      <div class="dot-content">
+        <span
+          @click="toggleDotState('dot-small')"
+          :class=dotState
+          class="dot dot-small"
+        ></span>
 
-        </div>
       </div>
+    </div>
 
   </div>
 </template>
@@ -25,9 +25,9 @@
 <script>
 export default {
   name: 'Background',
-  data () {
+  data() {
     return {
-      dotState: 'initial-state'
+      dotState: 'initial-state',
     }
   },
   methods: {
@@ -46,8 +46,8 @@ export default {
         this.dotState = 'passive'
         this.changeAnimationStatus('passive')
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -76,6 +76,7 @@ export default {
   background-color: $bg-color;
   border-color: $bg-color;
   box-shadow: 0 0 2px 2px #fff;
+  filter: blur(3px);
   &.initial-state {
     z-index: 9999;
     cursor: pointer;

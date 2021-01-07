@@ -4,10 +4,14 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/eslint-config-standard"],
-  plugins: ["vue"],
+  extends: [
+    'plugin:vue/essential'
+  ],
+  plugins: [
+    'vue'
+  ],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint'
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

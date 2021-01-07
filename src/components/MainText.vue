@@ -1,5 +1,5 @@
 <template>
-  <div :class="animationState" class="main-wrap">
+  <div :class="[animationState, 'main-wrap']">
     <div class="container">
 
       <!-- Paragrahp 1 -->
@@ -10,29 +10,34 @@
 
       <span
         @click="target01.status = 'show'"
-        :class="[initText.status, 'trigger target break delayed-3 animation-slow']"
+        :class="[initText.status, 'trigger target break delayed-2 animation-slow']"
       >{{ initText.txt.p4 }}</span>
 
       <span class="spacer"></span>
 
       <!-- Paragrahp 2 -->
+      <!-- 
+      <div class="break">
+        <span :class="[target01.status, 'target']">{{ target01.txt.p1 }}</span>
+        <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p2 }}</span>
+      </div>
 
-      <span :class="[ target02.status, 'target' ]">{{ target02.txt.p1 }}</span>
+      <div class="break">
+        <span :class="[target01.status, 'target']">{{ target01.txt.p3 }}</span>
+        <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p4 }}</span>
+      </div> -->
 
-      <span
-        @click="target02.status = 'show'"
-        :class="[target01.status, 'trigger target']"
-      >{{ target01.txt.p1 }}</span>
-      <span :class="[target01.status, 'target']">{{ target01.txt.p2 }}</span>
-      <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p3 }}</span>
-      <span :class="[target01.status, 'target delayed-2']">{{ target01.txt.p4 }}</span>
+      <div :class="[target01.status, 'target']">
+        <div class="break">
+          <span class="pr-1">{{ target01.txt.p1 }}</span>
+          <span>{{ target01.txt.p2 }}</span>
+        </div>
 
-      <span
-        :class="[target01.status, 'trigger target delayed-1']"
-        @click="target03.status = 'show'"
-      >{{ target01.txt.p5 }}</span>
-      <span :class="[target03.status, 'target']">{{ target02.txt.p5 }}</span>
-      <span :class="[target01.status, 'target delayed-2']">{{ target03.txt.p1 }}</span>
+        <div class="break">
+          <span class="pr-1">{{ target01.txt.p3 }}</span>
+          <span>{{ target01.txt.p4 }}</span>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -43,27 +48,25 @@ export default {
   name: 'MainText',
   props: {
     animationTriggered: Boolean,
-    animationState: String
+    animationState: String,
   },
-  data () {
+  data() {
     return {
       gitHubUser: 'https://api.github.com/users/3tw',
       gitHubUserRepos: 'https://api.github.com/users/3tw/repos',
       skills: {
         languages: ['JavaScript', 'PHP', 'CSS', 'HTML'],
         tools: ['Git', 'Sass', 'jQuery', 'Bootstrap', 'Laravel mix'],
-        frameworks: ['Vue.js', 'Laravel'],
-        cms: ['Wordpress, Twill']
+        frameworks: ['Laravel', 'Vue.js'],
+        cms: ['Twill', 'Wordpress'],
       },
       bio: {
-        location: 'fetch'
+        location: 'fetch',
       },
       links: {
-        gitHub: 'fetch'
+        gitHub: 'fetch',
       },
-      starredRepos: {
-
-      },
+      starredRepos: {},
 
       initText: {
         status: 'hidden',
@@ -71,67 +74,52 @@ export default {
           p1: 'This can be short ',
           p2: 'very very short',
           p3: 'presentation',
-          p4: 'or not.'
-        }
+          p4: 'or not.',
+        },
       },
 
       target01: {
         status: 'hidden',
         txt: {
-          p1: 'I',
-          p2: 'write',
-          p3: 'frontend',
-          p4: 'code.',
-          p5: 'Neki neki'
-        }
+          p1: 'name: ',
+          p2: 'Teo Winkler',
+          p3: 'types: ',
+          p4: 'frontend code',
+          p5: '',
+        },
       },
-
-      target02: {
-        status: 'hidden',
-        txt: {
-          p1: 'My name is Teo Winkler. '
-        }
-      },
-
-      target03: {
-        status: 'hidden',
-        txt: {
-          p1: 'Odkrito'
-        }
-      }
     }
   },
   watch: {
     animationTriggered: function () {
       this.initText.status = this.animationTriggered ? 'show' : 'hidden'
-    }
+    },
   },
   methods: {
-    getGitHubUser () {
+    getGitHubUser() {
       fetch(this.gitHubUser)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log(data)
           this.bio.location = data.location
           this.links.gitHub = data.html_url
         })
         .catch(function () {})
     },
-    getGitHubRepos () {
+    getGitHubRepos() {
       fetch(this.gitHubRepos)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log(data)
         })
         .catch(function () {})
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.getGitHubUser()
     this.getGitHubRepos()
-  }
+  },
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -169,6 +157,10 @@ span {
   width: 100%;
 }
 
+.pr-1 {
+  padding-right: 4px;
+}
+
 /* Animation trigger */
 
 .trigger {
@@ -193,7 +185,7 @@ span {
 
 .target.show,
 .target.show::after {
-  animation-duration: 1.2s;
+  animation-duration: 1.5s;
   animation-delay: 0.6s;
   animation-fill-mode: both;
   animation-iteration-count: 1;
@@ -214,10 +206,38 @@ span {
     position: absolute;
     z-index: 999;
     background-color: $text-color;
-    top: 0;
+    background: #ff5445;
+    background: #ffe40a;
+    background: #4abdac;
+    // background: linear-gradient(60deg, #000, #000 20%, #8b8b8b 70%, #fff 90%);
+    background: linear-gradient(
+      60deg,
+      #fff,
+      #fff 20%,
+      #8b8b8b 50%,
+      #000 90%,
+      #000
+    );
+    background: linear-gradient(
+      60deg,
+      #fff,
+      #fff 10%,
+      #4abdac 60%,
+      #ff2e93 80%,
+      #ff2e93
+    );
+    background: linear-gradient(
+      60deg,
+      #fff,
+      #fff 10%,
+      #cbff83 50%,
+      #8affe1 75%,
+      #8affe1
+    );
+    top: -1px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -1px;
     transform: scaleX(0);
     transform-origin: 0 50%;
     animation-name: text-revealer;
@@ -235,23 +255,43 @@ span {
 }
 
 @keyframes text-revealer {
-  0%,
+  0% {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+
   50% {
     transform-origin: 0 50%;
   }
 
-  60%,
+  60% {
+    transform: scaleX(1);
+    transform-origin: 100% 50%;
+  }
+  75% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
   100% {
+    opacity: 0;
+    transform: scaleX(0);
     transform-origin: 100% 50%;
   }
 
-  60% {
-    transform: scaleX(1);
-  }
+  // 60% {
+  //   transform: scaleX(1);
+  // }
 
-  100% {
-    transform: scaleX(0);
-  }
+  // 100% {
+  //   // transform: scaleX(0);
+  // }
 }
 
 /* Animation helpers */
