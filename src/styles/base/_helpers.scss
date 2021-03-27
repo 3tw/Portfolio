@@ -16,8 +16,11 @@
 /* Layout */
 
 .spacer {
-  height: 1.5rem;
+  height: 2rem;
   width: 100%;
+  @include breakpoint-up(xl) {
+    height: 3rem;
+  }
 }
 
 .pr-0 {

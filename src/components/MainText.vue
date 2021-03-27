@@ -8,35 +8,72 @@
       <span :class="[initText.status, 'target break delayed-2']">{{ initText.txt.p2 }}</span>
 
       <span
-        @click="target01.status = 'show'"
-        :class="[initText.status, 'underline trigger target break delayed-2 animation-slow']"
+        @click="showTarget('target01')"
+        :class="[initText.status, 'underlined trigger target break delayed-2 animation-slow']"
       >{{ initText.txt.p3 }}</span>
 
       <span class="spacer"></span>
 
-      <!-- Paragrahp 2 -->
+      <!-- Target 01 -->
+
+      <span :class="[target01.status, 'target break']">{{ target01.txt.p1 }}</span>
+      <span
+        @click="showTarget('target02')"
+        :class="[target01.status, 'underlined trigger target break']"
+      >{{ target01.txt.p2 }}</span>
+
+      <!-- Target 02 -->
+
+      <span :class="[target02.status, 'target break']">{{ target02.txt.p1 }}</span>
+      <span :class="[target02.status, 'target break']">{{ target02.txt.p2 }}</span>
+
+      <span :class="[target02.status, 'target delayed-1']">{{ target02.txt.p3}}</span>
+      <span
+        @click="showTarget('target03')"
+        :class="[target02.status, 'underlined trigger target  delayed-2']"
+      >{{ target02.txt.p4 }}</span>
+
+      <!-- Target 03 -->
+
+      <ul>
+        <li>
+          <span
+            v-for="text in target03.txt"
+            :key="text"
+            :class="[target03.status, 'target break']"
+          >{{ text }}</span>
+        </li>
+      </ul>
+
+      <!-- Target 02 -->
 
       <div class="break">
-        <span :class="[target01.status, 'target']">{{ target01.txt.p1 }}</span>
-        <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p2 }}</span>
+        <span :class="[target02.status, ' target  delayed-4']">{{ target02.txt.p5 }}</span>
+        <span
+          @click="showTarget('target04')"
+          :class="[target02.status, 'underlined trigger target delayed-4']"
+        >{{ target02.txt.p6 }}</span>
       </div>
 
-      <div class="break">
-        <span :class="[target01.status, 'target']">{{ target01.txt.p3 }}</span>
-        <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p4 }}</span>
-      </div>
-
-      <div :class="[target01.status, 'target']">
-        <div class="break">
-          <span class="pr-1">{{ target01.txt.p1 }}</span>
-          <span>{{ target01.txt.p2 }}</span>
-        </div>
-
-        <div class="break">
-          <span class="pr-1">{{ target01.txt.p3 }}</span>
-          <span>{{ target01.txt.p4 }}</span>
-        </div>
-      </div>
+      <!-- Target 04 -->
+      <span :class="[target04.status, 'target']">{{ target04.txt.p1 }}</span>
+      <!-- LinkedIn -->
+      <a
+        :href="url.linkedIn"
+        :key="url.linkedIn"
+        :class="[target04.status, 'trigger target underlined']"
+        target="_blank"
+        rel="noopener noreferrer"
+      >{{ target04.txt.p2 }}</a>
+      <span :class="[target04.status, 'target']">{{ target04.txt.p3 }}</span>
+      <!-- Github -->
+      <a
+        :href="url.gitHub"
+        :key="url.gitHub"
+        :class="[target04.status, 'trigger target underlined']"
+        target="_blank"
+        rel="noopener noreferrer"
+      >{{ target04.txt.p4 }}</a>
 
     </div>
   </div>
@@ -53,17 +90,12 @@ export default {
     return {
       gitHubUser: 'https://api.github.com/users/3tw',
       gitHubUserRepos: 'https://api.github.com/users/3tw/repos',
-      skills: {
-        languages: ['JavaScript', 'PHP', 'CSS', 'HTML'],
-        tools: ['Git', 'Sass', 'jQuery', 'Bootstrap', 'Laravel mix'],
-        frameworks: ['Laravel', 'Vue.js'],
-        cms: ['Twill', 'Wordpress'],
-      },
       bio: {
-        location: 'fetch',
+        location: null,
       },
-      links: {
-        gitHub: 'fetch',
+      url: {
+        gitHub: null,
+        linkedIn: 'https://www.linkedin.com/in/teo-winkler',
       },
 
       initText: {
@@ -78,11 +110,44 @@ export default {
       target01: {
         status: 'hidden',
         txt: {
-          p1: 'name: ',
-          p2: 'Teo Winkler',
-          p3: 'types: ',
-          p4: 'frontend code',
-          p5: '',
+          p1: "I'm currently working as a",
+          p2: 'frontend developer',
+        },
+      },
+      target02: {
+        status: 'hidden',
+        txt: {
+          p1: 'with JavaScript,',
+          p2: '(a lot of) CSS',
+          p3: 'and a bunch of ',
+          p4: 'other stuff.',
+          p5: "It's easy to",
+          p6: 'find me',
+        },
+      },
+      target03: {
+        status: 'hidden',
+        txt: {
+          p1: 'Laravel',
+          p2: 'PHP',
+          p3: 'Vue.js',
+          p4: 'Git',
+          p5: 'Sass',
+          p6: 'Wordpress',
+          p7: 'Twill',
+          p8: 'Laravel mix',
+          p9: 'Bootstrap',
+          p10: 'jQuery',
+          p11: '...',
+        },
+      },
+      target04: {
+        status: 'hidden',
+        txt: {
+          p1: 'on ',
+          p2: 'LinkedIn',
+          p3: 'and',
+          p4: 'GitHub.',
         },
       },
     }
@@ -93,13 +158,16 @@ export default {
     },
   },
   methods: {
+    showTarget(target) {
+      this[target].status = 'show'
+    },
     getGitHubUser() {
       fetch(this.gitHubUser)
         .then((response) => response.json())
         .then((data) => {
           console.log(data)
           this.bio.location = data.location
-          this.links.gitHub = data.html_url
+          this.url.gitHub = data.html_url
         })
         .catch(function () {})
     },
@@ -147,7 +215,7 @@ span {
   display: flex;
 }
 
-.underline {
+.underlined {
   position: relative;
   &::before {
     content: ' ';
@@ -160,14 +228,14 @@ span {
     background: linear-gradient(to top, #ff544582 35%, #0000 35%);
     transform: scaleY(0);
     transform-origin: bottom center;
-    transition: transform 1.1s .1s;
+    transition: transform 1.1s 0.1s;
   }
 }
 
 .main-wrap.active {
-  .underline::before {
+  .underlined::before {
     transform: scaleY(1);
-    transition: transform 1.1s .5s cubic-bezier(0.25, 0.1, 0, 1.09);
+    transition: transform 1.1s 0.5s cubic-bezier(0.25, 0.1, 0, 1.09);
   }
 }
 /* Animation trigger */
@@ -205,9 +273,10 @@ span {
 .target.show {
   position: relative;
   visibility: visible;
-  max-width: $container-max-width;
+  max-width: 100%;
   max-height: none;
-  padding-right: 4px;
+  padding-right: 0;
+  margin-right: 4px;
   white-space: nowrap;
   animation-name: clip-text;
 

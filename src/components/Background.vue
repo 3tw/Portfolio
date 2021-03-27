@@ -3,7 +3,7 @@
 
     <span
       @click="toggleDotState('dot-large')"
-      @click.once="startTextAnimation()"
+      @click.once="startTextAnimation(); showCircleCount() "
       :class=dotState
       class="dot dot-large"
     ></span>
@@ -20,13 +20,13 @@
     </div>
 
     <div
-      :class=dotState
+      :class="[counterState, dotState]"
       class="message message-1"
     >
       {{ circleCountOrdinal }} time
     </div>
     <div
-      :class=dotState
+      :class="[counterState, dotState]"
       class="message message-2"
     >
       around the site
@@ -57,18 +57,19 @@ export default {
   data() {
     return {
       dotState: 'initial-state',
+      counterState: 'hide-message',
       circleCount: 0,
       circleCountOrdinal: '',
     }
   },
   methods: {
-    startTextAnimation: function () {
+    startTextAnimation() {
       this.$emit('animation-started', true)
     },
-    changeAnimationStatus: function (state) {
+    changeAnimationStatus(state) {
       this.$emit('animation-status', state)
     },
-    toggleDotState: function (dotSize) {
+    toggleDotState(dotSize) {
       if (this.dotState === 'passive' || this.dotState === 'initial-state') {
         this.dotState = 'active'
         this.changeAnimationStatus('active')
@@ -79,24 +80,29 @@ export default {
         this.changeAnimationStatus('passive')
       }
     },
-    updateCircleCount: function () {
+    updateCircleCount() {
       this.circleCount++
-      window.localStorage.setItem('circleCount', this.circleCount )
+      window.localStorage.setItem('circleCount', this.circleCount)
       this.getGetOrdinal(this.circleCount)
     },
     // Credits go to : https://gist.github.com/jlbruno/1535691/db35b4f3af3dcbb42babc01541410f291a8e8fac
-    getGetOrdinal: function (n) {
+    getGetOrdinal(n) {
       let suffix = ['th', 'st', 'nd', 'rd']
       let v = n % 100
       this.circleCountOrdinal =
         n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
     },
+    showCircleCount() {
+      this.counterState = ''
+    },
   },
   mounted: function () {
     if (window.localStorage.getItem('circleCount')) {
       this.circleCount = window.localStorage.getItem('circleCount')
-    }
-    else {
+      this.circleCount ++
+      this.getGetOrdinal(this.circleCount)
+      this.showCircleCount()
+    } else {
       this.circleCount = 0
     }
   },
@@ -167,7 +173,7 @@ export default {
   @include center-absolute;
   height: 0;
   width: 0;
-  border-width: 4px;
+  border-width: 8px;
   background-color: $text-color;
   border-color: $text-color;
   &.initial-state {
@@ -228,16 +234,24 @@ export default {
 
 .message-1 {
   padding-right: 44px;
+  &.initial-state,
   &.passive {
-    animation: 3.5s ease-in-out normal forwards 1 fadeInLeft;
+    animation: fadeInLeft 3.5s ease-in-out normal forwards;
+  }
+  &.hide-message {
+    animation: none;
   }
 }
 .message-2 {
   writing-mode: tb;
   text-align: right;
   padding-bottom: 13px;
+  &.initial-state,
   &.passive {
-    animation: 4.5s ease-in-out normal forwards 1 fadeInTop;
+    animation: fadeInTop 4.5s ease-in-out normal forwards;
+  }
+  &.hide-message {
+    animation: none;
   }
 }
 
@@ -261,47 +275,47 @@ export default {
   height: min-content;
   transform: translate(-50%, -50%);
   &:nth-child(1) {
-    animation-delay: 5s;
+    animation-delay: 2.5s;
     transform: translate(calc(-50% - 64px), calc(-50% - 30px)) rotate(15deg);
   }
   &:nth-child(2) {
-    animation-delay: 5.5s;
+    animation-delay: 3.2s;
     transform: translate(calc(-50% - 52px), calc(-50% + 40px)) rotate(23deg);
   }
   &:nth-child(3) {
-    animation-delay: 6.5s;
+    animation-delay: 3.5s;
     transform: translate(calc(-50% + 23px), calc(-50% - 40px)) rotate(35deg);
   }
   &:nth-child(4) {
-    animation-delay: 6.9s;
+    animation-delay: 2.8s;
     transform: translate(calc(-50% + 18px), calc(-50% - 50px)) rotate(-17deg);
   }
   &:nth-child(5) {
-    animation-delay: 7.2s;
+    animation-delay: 4.2s;
     transform: translate(calc(-50% + 60px), calc(-50% + 10px)) rotate(-42deg);
   }
   &:nth-child(6) {
-    animation-delay: 7.9s;
+    animation-delay: 4.4s;
 
     transform: translate(calc(-50% + 80px), calc(-50% + 50px)) rotate(-20deg);
   }
   &:nth-child(7) {
-    animation-delay: 8s;
+    animation-delay: 4.8s;
 
     transform: translate(calc(-50% - 15px), calc(-50% + 65px)) rotate(170deg);
   }
   &:nth-child(8) {
-    animation-delay: 8.2s;
+    animation-delay: 5.2s;
 
     transform: translate(calc(-50% - 78px), calc(-50% + 12px)) rotate(-47deg);
   }
   &:nth-child(9) {
-    animation-delay: 8.4s;
+    animation-delay: 5.4s;
 
     transform: translate(calc(-50% - 21px), calc(-50% - 55px)) rotate(-12deg);
   }
   &:nth-child(10) {
-    animation-delay: 8.5s;
+    animation-delay: 6.4s;
 
     transform: translate(calc(-50% + 23px), calc(-50% + 58px)) rotate(8deg);
   }
