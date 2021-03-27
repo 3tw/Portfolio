@@ -19,6 +19,25 @@
       </div>
     </div>
 
+    <!-- <div
+      :class=dotState
+      class="message message-0"
+    >
+      we made
+    </div> -->
+    <div
+      :class=dotState
+      class="message message-1"
+    >
+       {{ circleCountOrdinal }} time
+    </div>
+    <div
+      :class=dotState
+      class="message message-2"
+    >
+    around the site
+    </div>
+
   </div>
 </template>
 
@@ -28,6 +47,8 @@ export default {
   data() {
     return {
       dotState: 'initial-state',
+      circleCount: 0,
+      circleCountOrdinal: '',
     }
   },
   methods: {
@@ -44,8 +65,20 @@ export default {
       } else if (this.dotState === 'active' && dotSize === 'dot-large') {
       } else {
         this.dotState = 'passive'
+        this.updateCircleCount()
         this.changeAnimationStatus('passive')
       }
+    },
+    updateCircleCount: function () {
+      this.circleCount++
+      this.getGetOrdinal(this.circleCount)
+    },
+    // Credits go to : https://gist.github.com/jlbruno/1535691/db35b4f3af3dcbb42babc01541410f291a8e8fac
+    getGetOrdinal: function (n) {
+      let suffix = ['th', 'st', 'nd', 'rd']
+      let v = n % 100
+      this.circleCountOrdinal =
+        n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
     },
   },
 }
@@ -86,17 +119,14 @@ export default {
     animation-timing-function: ease-in-out;
     animation-play-state: running;
     animation-direction: alternate;
-    &:hover::before {
-      content: '';
-    }
   }
   &.passive {
     z-index: 9999;
     cursor: pointer;
     border-width: 20px;
     animation-name: largeDotShrink, dotPulse;
-    animation-duration: 3s, 0.7s;
-    animation-delay: 0s, 3.2s;
+    animation-duration: 2s, 0.7s;
+    animation-delay: 0s, 1.9s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     animation-play-state: running;
@@ -118,6 +148,7 @@ export default {
   @include center-absolute;
   height: 0;
   width: 0;
+  border-width: 4px;
   background-color: $text-color;
   border-color: $text-color;
   &.initial-state {
@@ -127,10 +158,10 @@ export default {
     z-index: 50;
     cursor: pointer;
     transform: translate(-50%, -50%);
-    transition: transform 0.8s 1.2s cubic-bezier(0, 0.81, 0.63, 1.21);
+    transition: transform 0.65s 1.2s cubic-bezier(0, 0.81, 0.63, 1.21);
   }
   &.passive {
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-name: smallDotExpandAndShrink;
     // transition to passive after the animation is finished
     transform: translate(-50%, -120px);
@@ -153,6 +184,71 @@ export default {
   @include breakpoint-up(md) {
     top: 40px;
     right: 40px;
+  }
+}
+
+.message {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  text-align: right;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: transparent;
+  color: #111;
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 10px;
+  opacity: 0;
+}
+// .message-0 {
+//   bottom: 28px;
+//   padding-right: 44px;
+//   &.passive {
+//     animation: 3.5s ease-in-out normal forwards 1 fadeInLeft;
+//   }
+// }
+.message-1 {
+  padding-right: 44px;
+  &.passive {
+    animation: 3.5s ease-in-out normal forwards 1 fadeInLeft;
+  }
+}
+.message-2 {
+  writing-mode: tb;
+  text-align: right;
+  padding-bottom: 13px;
+  &.passive {
+    animation: 4.5s ease-in-out normal forwards 1 fadeInTop;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -197,18 +293,18 @@ export default {
     border-width: 30px;
   }
 
-  to {
-    border-width: 20px;
+  100% {
+    border-width: $large-dot-max-w;
   }
 }
 
 @keyframes dotPulse {
   from {
-    border-width: 20px;
+    border-width: $large-dot-max-w;
   }
 
   to {
-    border-width: 30px;
+    border-width: 10px;
   }
 }
 </style>

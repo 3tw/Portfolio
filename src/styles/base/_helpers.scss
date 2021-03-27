@@ -12,61 +12,18 @@
 .uppercase {
   text-transform: uppercase;
 }
-
-.small-print {
-  font-size: 11px;
-  line-height: 14px;
-}
-
-/* Seperating content */
+ 
+/* Layout */
 
 .spacer {
-  display: block;
-  height: 1px;
-  &.spacer-s {
-    margin: 20px 0;
-  }
-  &.spacer-m {
-    margin: 30px 0;
-  }
-  &.spacer-l {
-    margin: 40px 0;
-  }
+  height: 1.5rem;
+  width: 100%;
 }
 
-.divider {
-  display: block;
-  margin: 0;
-  padding: 0;
-  &.divider-s {
-    margin-top: 20px;
-    padding-bottom: 20px;
-  }
-  &.divider-m {
-    margin-top: 30px;
-    padding-bottom: 30px;
-  }
-  &.divider-l {
-    margin-top: 40px;
-    padding-bottom: 40px;
-  }
+.pr-0 {
+  padding-right: 0;
 }
 
-/* Image square ratio */
-
-.image-square-wrap {
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-  height: 0;
-  padding-top: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    object-fit: cover;
-    object-position: bottom;
-  }
+.pr-1 {
+  padding-right: 4px;
 }

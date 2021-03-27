@@ -2,64 +2,11 @@
  * Basic typography style for copy text
  */
 
+h1,
 body {
   font-family: 'Raleway', sans-serif;
   font-size: 1.25rem;
   color: $text-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1 {
-  // font-family: '';
-  font-size: 2.4rem;
-  line-height: 2.6rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-h2 {
-  // font-family: '';
-  font-size: 2.4rem;
-  line-height: 2.6rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-h3 {
-  // font-family: '';
-  font-size: 2rem;
-  line-height: 2.5rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-h4 {
-  // font-family: '';
-  font-size: 1.7rem;
-  line-height: 2rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-h5 {
-  // font-family: '';
-  font-size: 1.5rem;
-  line-height: 2rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-h6 {
-  // font-family: '';
-  font-size: 1.2rem;
-  line-height: 1.7rem;
-  // text-transform: uppercase;
-  margin: 0;
-  word-wrap: break-word;
 }

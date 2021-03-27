@@ -5,18 +5,17 @@
       <!-- Paragrahp 1 -->
 
       <span :class="[initText.status, 'target delayed-initial']">{{ initText.txt.p1 }}</span>
-      <span :class="[initText.status, 'target break delayed-initial']">{{ initText.txt.p2 }}</span>
-      <span :class="[initText.status, 'target break delayed-initial']">{{ initText.txt.p3 }}</span>
+      <span :class="[initText.status, 'target break delayed-2']">{{ initText.txt.p2 }}</span>
 
       <span
         @click="target01.status = 'show'"
         :class="[initText.status, 'trigger target break delayed-2 animation-slow']"
-      >{{ initText.txt.p4 }}</span>
+      >{{ initText.txt.p3 }}</span>
 
       <span class="spacer"></span>
 
       <!-- Paragrahp 2 -->
-      <!-- 
+      
       <div class="break">
         <span :class="[target01.status, 'target']">{{ target01.txt.p1 }}</span>
         <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p2 }}</span>
@@ -25,7 +24,7 @@
       <div class="break">
         <span :class="[target01.status, 'target']">{{ target01.txt.p3 }}</span>
         <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p4 }}</span>
-      </div> -->
+      </div>
 
       <div :class="[target01.status, 'target']">
         <div class="break">
@@ -66,15 +65,13 @@ export default {
       links: {
         gitHub: 'fetch',
       },
-      starredRepos: {},
-
+      
       initText: {
         status: 'hidden',
         txt: {
-          p1: 'This can be short ',
-          p2: 'very very short',
-          p3: 'presentation',
-          p4: 'or not.',
+          p1: 'Teo Winkler',
+          p2: '- very very brief',
+          p3: 'presentation'
         },
       },
 
@@ -152,26 +149,18 @@ span {
   display: flex;
 }
 
-.spacer {
-  height: 1.5rem;
-  width: 100%;
-}
-
-.pr-1 {
-  padding-right: 4px;
-}
-
 /* Animation trigger */
 
 .trigger {
   font-family: 'Lora', serif;
   cursor: pointer;
+  background: linear-gradient(to top, #ff544582 35%, #0000 35%);
 }
 
 /* Animation target */
 
 // Credits for creating the core of this animation go to Mattia Astorino
-// https://codepen.io/equinusocio/details/PoNYGGX
+// https://codepen.io/equinusocio/details/KNYOxJ
 
 .target {
   display: inline-flex;
@@ -181,6 +170,7 @@ span {
   max-height: 0;
   padding-right: 0;
   transition: max-width 1s 0.4s ease-in, padding-right 1s 0.4s ease-in;
+  width: max-content;
 }
 
 .target.show,
@@ -206,34 +196,6 @@ span {
     position: absolute;
     z-index: 999;
     background-color: $text-color;
-    background: #ff5445;
-    background: #ffe40a;
-    background: #4abdac;
-    // background: linear-gradient(60deg, #000, #000 20%, #8b8b8b 70%, #fff 90%);
-    background: linear-gradient(
-      60deg,
-      #fff,
-      #fff 20%,
-      #8b8b8b 50%,
-      #000 90%,
-      #000
-    );
-    background: linear-gradient(
-      60deg,
-      #fff,
-      #fff 10%,
-      #4abdac 60%,
-      #ff2e93 80%,
-      #ff2e93
-    );
-    background: linear-gradient(
-      60deg,
-      #fff,
-      #fff 10%,
-      #cbff83 50%,
-      #8affe1 75%,
-      #8affe1
-    );
     top: -1px;
     left: 0;
     right: 0;
@@ -273,7 +235,7 @@ span {
     opacity: 1;
   }
   80% {
-    opacity: 0.6;
+    opacity: 0.8;
   }
   95% {
     opacity: 0;
@@ -284,14 +246,6 @@ span {
     transform: scaleX(0);
     transform-origin: 100% 50%;
   }
-
-  // 60% {
-  //   transform: scaleX(1);
-  // }
-
-  // 100% {
-  //   // transform: scaleX(0);
-  // }
 }
 
 /* Animation helpers */
