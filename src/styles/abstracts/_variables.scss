@@ -17,7 +17,7 @@ $container-max-width: 650px;
 $container-paddings: (
   "xxs" 35px 20px,
   "xs" 50px 50px,
-  "sm" 60px 40px,
+  "sm" 60px 60px,
   "md" 80px 80px,
   "lg" 100px 100px,
   "xl" 140px 140px
@@ -30,8 +30,8 @@ $breakpoints: (
   "xs" : 360px,
   "sm" : 576px,
   "md" : 768px,
-  "lg" : 960px,
-  "xl" : 1200px
+  "lg" : 1080px,
+  "xl" : 1600px,
 );
 
 /* Header */

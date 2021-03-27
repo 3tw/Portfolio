@@ -4,18 +4,18 @@
 
       <!-- Paragrahp 1 -->
 
-      <span :class="[initText.status, 'target delayed-initial']">{{ initText.txt.p1 }}</span>
+      <h1 :class="[initText.status, 'target delayed-initial']">{{ initText.txt.p1 }}</h1>
       <span :class="[initText.status, 'target break delayed-2']">{{ initText.txt.p2 }}</span>
 
       <span
         @click="target01.status = 'show'"
-        :class="[initText.status, 'trigger target break delayed-2 animation-slow']"
+        :class="[initText.status, 'underline trigger target break delayed-2 animation-slow']"
       >{{ initText.txt.p3 }}</span>
 
       <span class="spacer"></span>
 
       <!-- Paragrahp 2 -->
-      
+
       <div class="break">
         <span :class="[target01.status, 'target']">{{ target01.txt.p1 }}</span>
         <span :class="[target01.status, 'target delayed-1']">{{ target01.txt.p2 }}</span>
@@ -65,13 +65,13 @@ export default {
       links: {
         gitHub: 'fetch',
       },
-      
+
       initText: {
         status: 'hidden',
         txt: {
           p1: 'Teo Winkler',
           p2: '- very very brief',
-          p3: 'presentation'
+          p3: 'presentation',
         },
       },
 
@@ -123,8 +123,6 @@ export default {
 .main-wrap {
   position: relative;
   z-index: 10;
-  font-size: 1.3rem;
-  line-height: 1.5rem;
   width: 100vw;
   text-align: left;
   &.passive {
@@ -149,12 +147,34 @@ span {
   display: flex;
 }
 
+.underline {
+  position: relative;
+  &::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, #ff544582 35%, #0000 35%);
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    transition: transform 1.1s .1s;
+  }
+}
+
+.main-wrap.active {
+  .underline::before {
+    transform: scaleY(1);
+    transition: transform 1.1s .5s cubic-bezier(0.25, 0.1, 0, 1.09);
+  }
+}
 /* Animation trigger */
 
 .trigger {
   font-family: 'Lora', serif;
   cursor: pointer;
-  background: linear-gradient(to top, #ff544582 35%, #0000 35%);
 }
 
 /* Animation target */

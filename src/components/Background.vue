@@ -19,23 +19,33 @@
       </div>
     </div>
 
-    <!-- <div
-      :class=dotState
-      class="message message-0"
-    >
-      we made
-    </div> -->
     <div
       :class=dotState
       class="message message-1"
     >
-       {{ circleCountOrdinal }} time
+      {{ circleCountOrdinal }} time
     </div>
     <div
       :class=dotState
       class="message message-2"
     >
-    around the site
+      around the site
+    </div>
+
+    <div
+      :class=dotState
+      class="indicators"
+    >
+
+      <span
+        v-for="n in 10"
+        :key="n"
+        @click="toggleDotState('dot-large')"
+        @click.once="startTextAnimation()"
+        class="indicator"
+      >
+        click
+      </span>
     </div>
 
   </div>
@@ -71,6 +81,7 @@ export default {
     },
     updateCircleCount: function () {
       this.circleCount++
+      window.localStorage.setItem('circleCount', this.circleCount )
       this.getGetOrdinal(this.circleCount)
     },
     // Credits go to : https://gist.github.com/jlbruno/1535691/db35b4f3af3dcbb42babc01541410f291a8e8fac
@@ -80,6 +91,14 @@ export default {
       this.circleCountOrdinal =
         n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
     },
+  },
+  mounted: function () {
+    if (window.localStorage.getItem('circleCount')) {
+      this.circleCount = window.localStorage.getItem('circleCount')
+    }
+    else {
+      this.circleCount = 0
+    }
   },
 }
 </script>
@@ -187,6 +206,9 @@ export default {
   }
 }
 
+/* Floating texts */
+
+.indicator,
 .message {
   position: fixed;
   bottom: 0;
@@ -203,13 +225,7 @@ export default {
   padding: 10px;
   opacity: 0;
 }
-// .message-0 {
-//   bottom: 28px;
-//   padding-right: 44px;
-//   &.passive {
-//     animation: 3.5s ease-in-out normal forwards 1 fadeInLeft;
-//   }
-// }
+
 .message-1 {
   padding-right: 44px;
   &.passive {
@@ -225,6 +241,86 @@ export default {
   }
 }
 
+.indicators.initial-state {
+  .indicator {
+    visibility: visible;
+    pointer-events: auto;
+    animation-duration: 0.1s;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+  }
+}
+.indicator {
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  height: min-content;
+  transform: translate(-50%, -50%);
+  &:nth-child(1) {
+    animation-delay: 5s;
+    transform: translate(calc(-50% - 64px), calc(-50% - 30px)) rotate(15deg);
+  }
+  &:nth-child(2) {
+    animation-delay: 5.5s;
+    transform: translate(calc(-50% - 52px), calc(-50% + 40px)) rotate(23deg);
+  }
+  &:nth-child(3) {
+    animation-delay: 6.5s;
+    transform: translate(calc(-50% + 23px), calc(-50% - 40px)) rotate(35deg);
+  }
+  &:nth-child(4) {
+    animation-delay: 6.9s;
+    transform: translate(calc(-50% + 18px), calc(-50% - 50px)) rotate(-17deg);
+  }
+  &:nth-child(5) {
+    animation-delay: 7.2s;
+    transform: translate(calc(-50% + 60px), calc(-50% + 10px)) rotate(-42deg);
+  }
+  &:nth-child(6) {
+    animation-delay: 7.9s;
+
+    transform: translate(calc(-50% + 80px), calc(-50% + 50px)) rotate(-20deg);
+  }
+  &:nth-child(7) {
+    animation-delay: 8s;
+
+    transform: translate(calc(-50% - 15px), calc(-50% + 65px)) rotate(170deg);
+  }
+  &:nth-child(8) {
+    animation-delay: 8.2s;
+
+    transform: translate(calc(-50% - 78px), calc(-50% + 12px)) rotate(-47deg);
+  }
+  &:nth-child(9) {
+    animation-delay: 8.4s;
+
+    transform: translate(calc(-50% - 21px), calc(-50% - 55px)) rotate(-12deg);
+  }
+  &:nth-child(10) {
+    animation-delay: 8.5s;
+
+    transform: translate(calc(-50% + 23px), calc(-50% + 58px)) rotate(8deg);
+  }
+}
+
+/* Keyframes */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
