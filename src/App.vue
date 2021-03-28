@@ -35,4 +35,9 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+#app {
+  position: relative;
+  min-height: 100vh;
+}
 </style>
