@@ -56,7 +56,9 @@
       </div>
 
       <!-- Target 04 -->
+
       <span :class="[target04.status, 'target']">{{ target04.txt.p1 }}</span>
+
       <!-- LinkedIn -->
       <a
         :href="url.linkedIn"
@@ -66,6 +68,7 @@
         rel="noopener noreferrer"
       >{{ target04.txt.p2 }}</a>
       <span :class="[target04.status, 'target']">{{ target04.txt.p3 }}</span>
+
       <!-- Github -->
       <a
         :href="url.gitHub"
@@ -74,6 +77,19 @@
         target="_blank"
         rel="noopener noreferrer"
       >{{ target04.txt.p4 }}</a>
+
+      <div class="break">
+        <span :class="[target04.status, 'target delayed-1']">{{ target04.txt.p5 }}</span>
+        <!-- Email -->
+        <a
+          :href="url.email"
+          :key="url.email"
+          :class="[target04.status, 'trigger target underlined delayed-1']"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ target04.txt.p6 }}</a>
+
+      </div>
 
     </div>
   </div>
@@ -96,6 +112,7 @@ export default {
       url: {
         gitHub: null,
         linkedIn: 'https://www.linkedin.com/in/teo-winkler',
+        email: 'mailto:teo.winkler@gmail.com'
       },
 
       initText: {
@@ -148,6 +165,8 @@ export default {
           p2: 'LinkedIn',
           p3: 'and',
           p4: 'GitHub.',
+          p5: 'or via',
+          p6: 'email.',
         },
       },
     }

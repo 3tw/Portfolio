@@ -1,9 +1,11 @@
 <template>
   <div class="background-wrap">
 
+    <!-- Dots -->
+
     <span
       @click="toggleDotState('dot-large')"
-      @click.once="startTextAnimation(); showCircleCount() "
+      @click.once="startTextAnimation(); showCircleCount(); hideIndicators()"
       :class=dotState
       class="dot dot-large"
     ></span>
@@ -19,6 +21,8 @@
       </div>
     </div>
 
+    <!-- Message -->
+
     <div
       :class="[counterState, dotState]"
       class="message message-1"
@@ -32,27 +36,23 @@
       around the site
     </div>
 
-    <div
-      :class=dotState
-      class="indicators"
-    >
+    <!-- Inidicators -->
 
-      <span
-        v-for="n in 10"
-        :key="n"
-        @click="toggleDotState('dot-large')"
-        @click.once="startTextAnimation()"
-        class="indicator"
-      >
-        click
-      </span>
-    </div>
+    <indicator
+      ref="indicator"
+      @indicator-clicked="startTextAnimation(); toggleDotState('dot-large'); showCircleCount()"
+    />
 
   </div>
 </template>
 
 <script>
+import Indicator from './Indicator.vue'
+
 export default {
+  components: {
+    Indicator,
+  },
   name: 'Background',
   data() {
     return {
@@ -62,7 +62,9 @@ export default {
       circleCountOrdinal: '',
     }
   },
+
   methods: {
+    /* Dot state managment */
     startTextAnimation() {
       this.$emit('animation-started', true)
     },
@@ -80,6 +82,8 @@ export default {
         this.changeAnimationStatus('passive')
       }
     },
+
+    /* Circle count */
     updateCircleCount() {
       this.circleCount++
       window.localStorage.setItem('circleCount', this.circleCount)
@@ -95,11 +99,16 @@ export default {
     showCircleCount() {
       this.counterState = ''
     },
+
+    /* Indicators */
+    hideIndicators() {
+      this.$refs.indicator.hideIndicators()
+    },
   },
   mounted: function () {
     if (window.localStorage.getItem('circleCount')) {
       this.circleCount = window.localStorage.getItem('circleCount')
-      this.circleCount ++
+      this.circleCount++
       this.getGetOrdinal(this.circleCount)
       this.showCircleCount()
     } else {
@@ -214,7 +223,6 @@ export default {
 
 /* Floating texts */
 
-.indicator,
 .message {
   position: fixed;
   bottom: 0;
@@ -252,72 +260,6 @@ export default {
   }
   &.hide-message {
     animation: none;
-  }
-}
-
-.indicators.initial-state {
-  .indicator {
-    visibility: visible;
-    pointer-events: auto;
-    animation-duration: 0.1s;
-    animation-name: fadeIn;
-    animation-fill-mode: forwards;
-  }
-}
-.indicator {
-  opacity: 0;
-  visibility: hidden;
-  user-select: none;
-  pointer-events: none;
-  top: 50%;
-  left: 50%;
-  right: auto;
-  height: min-content;
-  transform: translate(-50%, -50%);
-  &:nth-child(1) {
-    animation-delay: 2.5s;
-    transform: translate(calc(-50% - 64px), calc(-50% - 30px)) rotate(15deg);
-  }
-  &:nth-child(2) {
-    animation-delay: 3.2s;
-    transform: translate(calc(-50% - 52px), calc(-50% + 40px)) rotate(23deg);
-  }
-  &:nth-child(3) {
-    animation-delay: 3.5s;
-    transform: translate(calc(-50% + 23px), calc(-50% - 40px)) rotate(35deg);
-  }
-  &:nth-child(4) {
-    animation-delay: 2.8s;
-    transform: translate(calc(-50% + 18px), calc(-50% - 50px)) rotate(-17deg);
-  }
-  &:nth-child(5) {
-    animation-delay: 4.2s;
-    transform: translate(calc(-50% + 60px), calc(-50% + 10px)) rotate(-42deg);
-  }
-  &:nth-child(6) {
-    animation-delay: 4.4s;
-
-    transform: translate(calc(-50% + 80px), calc(-50% + 50px)) rotate(-20deg);
-  }
-  &:nth-child(7) {
-    animation-delay: 4.8s;
-
-    transform: translate(calc(-50% - 15px), calc(-50% + 65px)) rotate(170deg);
-  }
-  &:nth-child(8) {
-    animation-delay: 5.2s;
-
-    transform: translate(calc(-50% - 78px), calc(-50% + 12px)) rotate(-47deg);
-  }
-  &:nth-child(9) {
-    animation-delay: 5.4s;
-
-    transform: translate(calc(-50% - 21px), calc(-50% - 55px)) rotate(-12deg);
-  }
-  &:nth-child(10) {
-    animation-delay: 6.4s;
-
-    transform: translate(calc(-50% + 23px), calc(-50% + 58px)) rotate(8deg);
   }
 }
 

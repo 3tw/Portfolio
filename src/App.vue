@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Background @animation-started="startTextAnimation($event)" @animation-status="recordAnimationState($event, state)" />
-    <MainText :animationTriggered="textAnimationStarted" :animationState="animationState" />
+    <background @animation-started="startTextAnimation($event)" @animation-status="recordAnimationState($event, state)" />
+    <main-text :animationTriggered="textAnimationStarted" :animationState="animationState" />
   </div>
 </template>
 
