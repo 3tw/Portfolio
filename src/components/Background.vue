@@ -143,7 +143,6 @@ export default {
   background-color: $bg-color;
   border-color: $bg-color;
   box-shadow: 0 0 2px 2px #fff;
-  filter: blur(3px);
   &.initial-state {
     z-index: 9999;
     cursor: pointer;
