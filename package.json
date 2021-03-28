@@ -5,12 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "sass": "^1.32.8",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-gtag": "^1.11.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

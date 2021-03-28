@@ -184,20 +184,18 @@ export default {
       fetch(this.gitHubUser)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
           this.bio.location = data.location
           this.url.gitHub = data.html_url
         })
         .catch(function () {})
     },
-    getGitHubRepos() {
-      fetch(this.gitHubRepos)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch(function () {})
-    },
+    // getGitHubRepos() {
+    //   fetch(this.gitHubRepos)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //     })
+    //     .catch(function () {})
+    // },
   },
   mounted() {
     this.getGitHubUser()
