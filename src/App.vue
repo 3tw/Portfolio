@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <background @animation-started="startTextAnimation($event)" @animation-status="recordAnimationState($event, state)" />
     <main-text :animationTriggered="textAnimationStarted" :animationState="animationState" />
   </div>
