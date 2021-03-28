@@ -146,6 +146,7 @@ export default {
   background-color: $bg-color;
   border-color: $bg-color;
   box-shadow: 0 0 2px 2px #fff;
+  will-change: border-width;
   &.initial-state {
     z-index: 9999;
     cursor: pointer;
@@ -187,6 +188,7 @@ export default {
   border-width: 8px;
   background-color: $text-color;
   border-color: $text-color;
+  will-change: border-width;
   &.initial-state {
     transform: translate(-50%, -120px);
   }

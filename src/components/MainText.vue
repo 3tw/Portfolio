@@ -164,7 +164,7 @@ export default {
           p1: 'on ',
           p2: 'LinkedIn',
           p3: 'and',
-          p4: 'GitHub.',
+          p4: 'GitHub',
           p5: 'or via',
           p6: 'email.',
         },
