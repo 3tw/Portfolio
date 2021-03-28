@@ -206,8 +206,8 @@ export default {
 .dot-wrap {
   position: absolute;
   z-index: 50;
-  top: 20px;
-  right: 20px;
+  top: 25px;
+  right: 25px;
   width: 5px;
   height: 5px;
   .dot-content {
