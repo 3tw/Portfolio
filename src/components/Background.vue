@@ -26,14 +26,17 @@
     <div
       :class="[counterState, dotState]"
       class="message message-1"
-    >
-      {{ circleCountOrdinal }} time
+    ><span>
+        {{ circleCountOrdinal }} time
+      </span>
     </div>
     <div
       :class="[counterState, dotState]"
       class="message message-2"
     >
-      around the site
+      <span>
+        around the site
+      </span>
     </div>
 
     <!-- Inidicators -->
@@ -235,12 +238,14 @@ export default {
   text-transform: uppercase;
   font-size: 24px;
   line-height: 24px;
-  padding: 10px;
   opacity: 0;
 }
 
 .message-1 {
-  padding-right: 44px;
+  span {
+    display: block;
+    padding: 10px 44px 10px 10px;
+  }
   &.initial-state,
   &.passive {
     animation: fadeInLeft 3.5s ease-in-out normal forwards;
@@ -252,7 +257,10 @@ export default {
 .message-2 {
   writing-mode: tb;
   text-align: right;
-  padding-bottom: 13px;
+  span {
+    display: block;
+    padding: 10px 10px 13px 10px;
+  }
   &.initial-state,
   &.passive {
     animation: fadeInTop 4.5s ease-in-out normal forwards;

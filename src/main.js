@@ -1,10 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueGtag from 'vue-gtag'
+import VueGtag from 'vue-gtag-next'
 
-createApp(App).mount('#app')
+const app = createApp(App)
 
-// config. for VueAnalytics
-Vue.use(VueGtag, {
-  config: { id: 'UA-157606098-1' }
+app.use(VueGtag, {
+  property: {
+    id: 'UA-157606098-1'
+  }
 })
+
+app.mount('#app')

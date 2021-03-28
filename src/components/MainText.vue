@@ -199,7 +199,7 @@ export default {
   },
   mounted() {
     this.getGitHubUser()
-    this.getGitHubRepos()
+    // this.getGitHubRepos()
   },
 }
 </script>
