@@ -169,7 +169,7 @@ export default {
     animation-play-state: running;
     animation-direction: normal, alternate;
     animation-iteration-count: 1, infinite;
-    transition: z-index 3s step-end;
+    transition: z-index 1.5s step-end;
   }
   &.active {
     z-index: 0;
@@ -228,15 +228,16 @@ export default {
 /* Floating texts */
 
 .message {
+  z-index: 10;
   position: fixed;
   bottom: 0;
   right: 0;
   width: auto;
   text-align: right;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
-  -webkit-text-fill-color: transparent;
-  color: #111;
+  -webkit-text-stroke-color: #fff;
+  // -webkit-text-fill-color: transparent;
+  color: #fff;
   text-transform: uppercase;
   font-size: 24px;
   line-height: 24px;

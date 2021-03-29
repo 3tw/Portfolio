@@ -76,7 +76,7 @@ export default {
   width: auto;
   text-align: right;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-color: #ffffffa1;
   -webkit-text-fill-color: transparent;
   color: #111;
   text-transform: uppercase;

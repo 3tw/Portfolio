@@ -36,12 +36,11 @@
       <!-- Target 03 -->
 
       <ul>
-        <li>
-          <span
-            v-for="text in target03.txt"
-            :key="text"
-            :class="[target03.status, 'target break']"
-          >{{ text }}</span>
+        <li
+          v-for="text in target03.txt"
+          :key="text"
+        >
+          <span :class="[target03.status, 'target break']">{{ text }}</span>
         </li>
       </ul>
 
@@ -112,7 +111,7 @@ export default {
       url: {
         gitHub: null,
         linkedIn: 'https://www.linkedin.com/in/teo-winkler',
-        email: 'mailto:teo.winkler@gmail.com'
+        email: 'mailto:teo.winkler@gmail.com',
       },
 
       initText: {
