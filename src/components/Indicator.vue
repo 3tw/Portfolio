@@ -23,7 +23,7 @@ export default {
           {
             class: ['indicator'],
             style: [
-              { animationDelay: this.calculateDelay(i+1) },
+              { animationDelay: this.calculateDelay(i + 1) },
               { transform: this.transformElement() },
             ],
             onClickOnce: this.indicatorClicked,
@@ -49,7 +49,7 @@ export default {
       return Math.floor(Math.random() * Math.floor(max))
     },
     calculateDelay(i) {
-      const indexDelay = i/ i**2
+      const indexDelay = i / i ** 2
       const totalDelay = 1.2 + indexDelay + this.getRandomFloat(0.2)
       return totalDelay + 's'
     },
@@ -84,6 +84,9 @@ export default {
   line-height: 24px;
   padding: 10px;
   opacity: 0;
+  &:hover {
+    -webkit-text-fill-color: #fff;
+  }
 }
 
 .indicators.indicators-visible {

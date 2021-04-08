@@ -61,21 +61,31 @@
       <!-- LinkedIn -->
       <a
         :href="url.linkedIn"
-        :key="url.linkedIn"
         :class="[target04.status, 'trigger target underlined']"
         target="_blank"
         rel="noopener noreferrer"
       >{{ target04.txt.p2 }}</a>
-      <span :class="[target04.status, 'target']">{{ target04.txt.p3 }}</span>
 
-      <!-- Github -->
-      <a
-        :href="url.gitHub"
-        :key="url.gitHub"
-        :class="[target04.status, 'trigger target underlined']"
-        target="_blank"
-        rel="noopener noreferrer"
-      >{{ target04.txt.p4 }}</a>
+      <div class="break">
+
+        <!-- CodePen -->
+        <a
+          :href="url.codePen"
+          :class="[target04.status, 'trigger target underlined']"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ target04.txt.p3 }}</a>
+
+        <!-- Github -->
+        <a
+          :href="url.gitHub"
+          :key="url.gitHub"
+          :class="[target04.status, 'trigger target underlined']"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ target04.txt.p4 }}</a>
+        
+      </div>
 
       <div class="break">
         <span :class="[target04.status, 'target delayed-1']">{{ target04.txt.p5 }}</span>
@@ -111,6 +121,7 @@ export default {
       url: {
         gitHub: null,
         linkedIn: 'https://www.linkedin.com/in/teo-winkler',
+        codePen: 'https://codepen.io/3tw',
         email: 'mailto:teo.winkler@gmail.com',
       },
 
@@ -161,8 +172,8 @@ export default {
         status: 'hidden',
         txt: {
           p1: 'on ',
-          p2: 'LinkedIn',
-          p3: 'and',
+          p2: 'LinkedIn,',
+          p3: 'CodePen,',
           p4: 'GitHub',
           p5: 'or via',
           p6: 'email.',
