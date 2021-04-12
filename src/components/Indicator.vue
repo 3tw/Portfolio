@@ -6,9 +6,15 @@ export default {
   data() {
     return {
       inidicatorsAreVisible: true,
+      previousX: 0,
+      previousY: 0,
+      currentX: 0,
+      currentY: 0,
     }
   },
   render: function () {
+    let differenceX
+    let differenceY
     return h(
       'div',
       {
@@ -17,7 +23,8 @@ export default {
           { 'indicators-visible': this.inidicatorsAreVisible },
         ],
       },
-      Array.apply(null, { length: 40 }).map((item, i) => {
+
+      Array.apply(null, { length: 80 }).map((item, i) => {
         return h(
           'span',
           {
