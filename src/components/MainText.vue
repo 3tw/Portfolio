@@ -10,7 +10,9 @@
       <span
         @click="showTarget('target01')"
         :class="[initText.status, 'underlined trigger target break delayed-2 animation-slow']"
-      >{{ initText.txt.p3 }}</span>
+      ><span>
+          {{ initText.txt.p3 }}</span>
+      </span>
 
       <span class="spacer"></span>
 
@@ -21,6 +23,19 @@
         @click="showTarget('target02')"
         :class="[target01.status, 'underlined trigger target break']"
       >{{ target01.txt.p2 }}</span>
+
+      <div
+        :class="[target01.status, 'target']"
+        class="break"
+      >
+        <span class="mr-space">{{ target01.txt.phil1 }}</span>
+        <a
+          href="#footnote"
+          @click="showTarget('target05')"
+          class="underlined trigger"
+        >{{ target01.txt.phil2}}</a>
+      </div>
+      <span class="spacer"></span>
 
       <!-- Target 02 -->
 
@@ -47,11 +62,11 @@
       <!-- Target 02 -->
 
       <div class="break">
-        <span :class="[target02.status, ' target  delayed-4']">{{ target02.txt.p5 }}</span>
+        <span :class="[target02.status, ' target  delayed-4']">{{ target02.txt.contact1 }}</span>
         <span
           @click="showTarget('target04')"
           :class="[target02.status, 'underlined trigger target delayed-4']"
-        >{{ target02.txt.p6 }}</span>
+        >{{ target02.txt.contact2 }}</span>
       </div>
 
       <!-- Target 04 -->
@@ -68,14 +83,6 @@
 
       <div class="break">
 
-        <!-- CodePen -->
-        <a
-          :href="url.codePen"
-          :class="[target04.status, 'trigger target underlined']"
-          target="_blank"
-          rel="noopener noreferrer"
-        >{{ target04.txt.p3 }}</a>
-
         <!-- Github -->
         <a
           :href="url.gitHub"
@@ -83,8 +90,16 @@
           :class="[target04.status, 'trigger target underlined']"
           target="_blank"
           rel="noopener noreferrer"
+        >{{ target04.txt.p3 }}</a>
+
+        <!-- CodePen -->
+        <a
+          :href="url.codePen"
+          :class="[target04.status, 'trigger target underlined']"
+          target="_blank"
+          rel="noopener noreferrer"
         >{{ target04.txt.p4 }}</a>
-        
+
       </div>
 
       <div class="break">
@@ -98,6 +113,25 @@
           rel="noopener noreferrer"
         >{{ target04.txt.p6 }}</a>
 
+      </div>
+
+      <div
+        id="footnote"
+        :class="[target05.status,'footnote']"
+      >
+        <p>
+          {{ target05.txt.footnote1 }}
+          <a
+            :href="url.hegel"
+            class="underlined"
+          >{{ target05.txt.hegel1 }}</a>
+          {{ target05.txt.footnote2 }}
+          <a
+            :href="url.uva"
+            class="underlined"
+          >{{ target05.txt.uva }}</a>
+          {{ target05.txt.footnote3 }}
+        </p>
       </div>
 
     </div>
@@ -123,6 +157,8 @@ export default {
         linkedIn: 'https://www.linkedin.com/in/teo-winkler',
         codePen: 'https://codepen.io/3tw',
         email: 'mailto:teo.winkler@gmail.com',
+        hegel: 'https://en.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel',
+        uva: 'https://www.uva.nl/en',
       },
 
       initText: {
@@ -137,19 +173,22 @@ export default {
       target01: {
         status: 'hidden',
         txt: {
-          p1: "I'm currently working as a",
+          // p1: 'I\'m currently working as a',
+          p1: "I'm a self-taught",
           p2: 'frontend developer',
+          phil1: 'with an ',
+          phil2: 'MA in Philosophy*',
         },
       },
       target02: {
         status: 'hidden',
         txt: {
-          p1: 'with JavaScript,',
+          p1: 'I work with JavaScript,',
           p2: '(a lot of) CSS',
           p3: 'and a bunch of ',
           p4: 'other stuff.',
-          p5: "It's easy to",
-          p6: 'find me',
+          contact1: "It's easy to",
+          contact2: 'find me',
         },
       },
       target03: {
@@ -163,9 +202,10 @@ export default {
           p6: 'Wordpress',
           p7: 'Twill',
           p8: 'Laravel mix',
-          p9: 'Bootstrap',
-          p10: 'jQuery',
-          p11: '...',
+          p9: 'GSAP',
+          p10: 'Bootstrap',
+          p11: 'jQuery',
+          p12: '...',
         },
       },
       target04: {
@@ -173,10 +213,21 @@ export default {
         txt: {
           p1: 'on ',
           p2: 'LinkedIn,',
-          p3: 'CodePen,',
-          p4: 'GitHub',
+          p3: 'GitHub,',
+          p4: 'CodePen',
           p5: 'or via',
           p6: 'email.',
+        },
+      },
+      target05: {
+        status: 'hidden',
+        txt: {
+          footnote1: '* I wrote my thesis on',
+          hegel1: 'Hegel',
+          footnote2:
+            ', his theory of action, to be precise, at the University of Amsterdam',
+          uva: '(UvA)',
+          footnote4: '.',
         },
       },
     }
@@ -259,12 +310,37 @@ span {
   }
 }
 
+.mr-space {
+  margin-right: 4px;
+}
+
 .main-wrap.active {
   .underlined::before {
     transform: scaleY(1);
     transition: transform 1.1s 0.5s cubic-bezier(0.25, 0.1, 0, 1.09);
   }
 }
+
+/* Footnote */
+
+.footnote {
+  font-family: 'Lora', serif;
+  visibility: hidden;
+  opacity: 0;
+  padding-top: 50px;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 1.2s cubic-bezier(0.32, 0.01, 0.19, 1.09);
+  &.show {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+  }
+}
+
 /* Animation trigger */
 
 .trigger {
@@ -284,13 +360,17 @@ span {
   max-width: 0;
   max-height: 0;
   padding-right: 0;
-  transition: max-width 1s 0.4s ease-in, padding-right 1s 0.4s ease-in;
+  transition: max-width 0.65s 0.4s ease-in, padding-right 1s 0.4s ease-in;
   width: max-content;
+  will-change: clip-path;
+}
+.target::after {
+  will-change: transform, transform-origin;
 }
 
 .target.show,
 .target.show::after {
-  animation-duration: 1.5s;
+  animation-duration: 1.2s;
   animation-delay: 0.6s;
   animation-fill-mode: both;
   animation-iteration-count: 1;
@@ -324,11 +404,14 @@ span {
 }
 
 @keyframes clip-text {
-  from {
+  0% {
     clip-path: inset(0 100% 0 0);
   }
-  to {
+  99% {
     clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: none;
   }
 }
 
@@ -338,7 +421,7 @@ span {
     transform: scaleX(0);
     transform-origin: 0 50%;
   }
-
+  
   50% {
     transform-origin: 0 50%;
   }
@@ -347,6 +430,7 @@ span {
     transform: scaleX(1);
     transform-origin: 100% 50%;
   }
+
   75% {
     opacity: 1;
   }
