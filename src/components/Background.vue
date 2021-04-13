@@ -136,10 +136,11 @@ export default {
   display: block;
   border-radius: 50%;
   border-style: solid;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dot-large {
-  position: absolute;
+  position: fixed;
   @include center-absolute;
   height: 0;
   width: 0;
@@ -208,7 +209,7 @@ export default {
 }
 
 .dot-wrap {
-  position: absolute;
+  position: fixed;
   z-index: 50;
   top: 25px;
   right: 25px;

@@ -346,6 +346,7 @@ span {
 .trigger {
   font-family: 'Lora', serif;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Animation target */
