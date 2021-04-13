@@ -9,7 +9,7 @@
 
       <span
         @click="showTarget('target01')"
-        :class="[initText.status, 'underlined trigger target break delayed-2 animation-slow']"
+        :class="[initText.status, 'underlined trigger target break delayed-2']"
       ><span>
           {{ initText.txt.p3 }}</span>
       </span>
@@ -355,15 +355,16 @@ span {
 // https://codepen.io/equinusocio/details/KNYOxJ
 
 .target {
+  overflow: hidden;
   display: inline-flex;
   flex-wrap: wrap;
   visibility: hidden;
   max-width: 0;
   max-height: 0;
   padding-right: 0;
-  transition: max-width 0.65s 0.4s ease-in, padding-right 1s 0.4s ease-in;
+  transition: padding-right 1s 0.4s ease-in;
   width: max-content;
-  will-change: clip-path;
+  will-change: max-width;
 }
 .target::after {
   will-change: transform, transform-origin;
@@ -371,11 +372,11 @@ span {
 
 .target.show,
 .target.show::after {
-  animation-duration: 1.2s;
-  animation-delay: 0.6s;
+  animation-duration: 1.6s;
+  animation-delay: 0.5s;
   animation-fill-mode: both;
   animation-iteration-count: 1;
-  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.69, 0.03, 0.25, 1.08);
 }
 
 .target.show {
@@ -406,13 +407,13 @@ span {
 
 @keyframes clip-text {
   0% {
-    clip-path: inset(0 100% 0 0);
+    max-width: 0;
   }
-  99% {
-    clip-path: inset(0 0 0 0);
+  15% {
+    max-width: 0;
   }
   100% {
-    clip-path: none;
+    max-width: 500px;
   }
 }
 
@@ -422,12 +423,13 @@ span {
     transform: scaleX(0);
     transform-origin: 0 50%;
   }
-  
-  50% {
+
+  15% {
+    transform: scaleX(1);
     transform-origin: 0 50%;
   }
 
-  60% {
+  50% {
     transform: scaleX(1);
     transform-origin: 100% 50%;
   }
@@ -435,13 +437,11 @@ span {
   75% {
     opacity: 1;
   }
+
   80% {
     opacity: 0.8;
   }
-  95% {
-    opacity: 0;
-    transform: scaleX(0.4);
-  }
+
   100% {
     opacity: 0;
     transform: scaleX(0);
@@ -456,27 +456,23 @@ span {
   &.delayed-initial::after {
     animation-delay: 1s;
   }
+
   &.delayed-1,
   &.delayed-1::after {
     animation-delay: 2s;
   }
   &.delayed-2,
   &.delayed-2::after {
-    animation-delay: 2.8s;
+    animation-delay: 2.6s;
   }
   &.delayed-3,
   &.delayed-3::after {
     animation-delay: 3.8s;
   }
+
   &.delayed-4,
   &.delayed-4::after {
     animation-delay: 4.8s;
-  }
-}
-
-.target.show {
-  &.animation-slow::after {
-    animation-duration: 1.8s;
   }
 }
 </style>
