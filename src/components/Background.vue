@@ -229,7 +229,7 @@ export default {
 /* Floating texts */
 
 .message {
-  z-index: 10;
+  z-index: 100;
   position: fixed;
   bottom: 0;
   right: 0;
