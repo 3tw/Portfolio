@@ -185,7 +185,7 @@ export default {
         status: 'hidden',
         txt: {
           p1: 'At the moment, ',
-          p2: 'In\'m working with JS,',
+          p2: 'I am working with JS,',
           p3: '- Vue.js/Nuxt.js -',
           p4: 'and learning Rust 🦀.',
           contact1: "It's easy to",
