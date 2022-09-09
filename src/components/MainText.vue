@@ -44,9 +44,10 @@
 
       <span :class="[target02.status, 'target delayed-1']">{{ target02.txt.p3}}</span>
       <span
-        @click="showTarget('target03')"
-        :class="[target02.status, 'underlined trigger target  delayed-2']"
-      >{{ target02.txt.p4 }}</span>
+        :class="[target02.status, 'target  break delayed-2']"
+      >
+      {{ target02.txt.p4 }}
+      </span>
 
       <!-- Target 03 -->
 
@@ -183,10 +184,10 @@ export default {
       target02: {
         status: 'hidden',
         txt: {
-          p1: 'I work with JavaScript,',
-          p2: '(a lot of) CSS',
-          p3: 'and a bunch of ',
-          p4: 'other stuff.',
+          p1: 'At the moment, ',
+          p2: 'In\'m working with JS,',
+          p3: '- Vue.js/Nuxt.js -',
+          p4: 'and learning Rust 🦀.',
           contact1: "It's easy to",
           contact2: 'find me',
         },
@@ -194,18 +195,11 @@ export default {
       target03: {
         status: 'hidden',
         txt: {
-          p1: 'Laravel',
-          p2: 'PHP',
-          p3: 'Vue.js',
-          p4: 'Git',
-          p5: 'Sass',
-          p6: 'Wordpress',
-          p7: 'Twill',
-          p8: 'Laravel mix',
-          p9: 'GSAP',
-          p10: 'Bootstrap',
-          p11: 'jQuery',
-          p12: '...',
+          p1: 'PHP',
+          p2: 'Laravel',
+          p3: 'Wordpress',
+          p4: 'jQuery',
+          p5: '...',
         },
       },
       target04: {
