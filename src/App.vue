@@ -1,35 +1,55 @@
 <template>
   <div class="relative">
-    <background @animation-started="startTextAnimation($event)" @animation-status="recordAnimationState($event, state)" />
-    <main-text :animationTriggered="textAnimationStarted" :animationState="animationState" />
+    <Background
+      @animation-started="startTextAnimation($event)"
+      @animation-status="recordAnimationState($event, state)"
+    />
+    <ShortResume
+      :animation-triggered="textAnimationStarted"
+      :animation-state="animationState"
+      :git-hub-url="gitHubUrl"
+    />
   </div>
 </template>
 
 <script>
-import MainText from './components/MainText.vue'
-import Background from './components/Background.vue'
+import ShortResume from './components/ShortResume.vue';
+import Background from './components/Background.vue';
 
 export default {
   name: 'App',
   components: {
-    MainText,
-    Background
+    ShortResume,
+    Background,
   },
-  data () {
+  data() {
     return {
       textAnimationStarted: false,
-      animationState: 'passive'
-    }
+      animationState: 'passive',
+      gitHubUser: 'https://api.github.com/users/3tw',
+      gitHubUrl: '',
+    };
   },
   methods: {
     startTextAnimation: function (start) {
-      this.textAnimationStarted = start === true
+      this.textAnimationStarted = start === true;
     },
     recordAnimationState: function (state) {
-      this.animationState = state
-    }
-  }
-}
+      this.animationState = state;
+    },
+    getGitHubUser() {
+      fetch(this.gitHubUser)
+        .then((response) => response.json())
+        .then((data) => {
+          this.gitHubUrl = data.html_url;
+        })
+        .catch(function (e) {console.log(e)});
+    },
+  },
+  mounted() {
+    this.getGitHubUser();
+  },
+};
 </script>
 
 <style lang="scss">

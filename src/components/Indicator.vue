@@ -5,7 +5,7 @@ export default {
   name: 'Indicator',
   data() {
     return {
-      inidicatorsAreVisible: true,
+      indicatorsAreVisible: true,
       previousX: 0,
       previousY: 0,
       currentX: 0,
@@ -20,7 +20,7 @@ export default {
       {
         class: [
           'indicators',
-          { 'indicators-visible': this.inidicatorsAreVisible },
+          { 'indicators-visible': this.indicatorsAreVisible },
         ],
       },
 
@@ -43,7 +43,7 @@ export default {
 
   methods: {
     hideIndicators() {
-      this.inidicatorsAreVisible = false
+      this.indicatorsAreVisible = false
     },
     indicatorClicked() {
       this.hideIndicators()
@@ -75,7 +75,6 @@ export default {
 
 <style lang='scss'>
 /* Floating texts */
-
 .indicator {
   position: fixed;
   bottom: 0;

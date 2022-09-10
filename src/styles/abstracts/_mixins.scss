@@ -1,31 +1,9 @@
 /* Container */
 
-// Main padding
-
 @mixin container-padding {
   @each $breakpoint, $py, $px in $container-paddings {
     @include breakpoint-up($breakpoint) {
       padding: $py $px;
-    }
-  }
-}
-
-// Fill edge 2 edge on screens smaller than SM
-
-@mixin container-padding-sm-fill {
-  @each $breakpoint, $py, $px in $container-paddings {
-    @if $breakpoint == xxs {
-      @include breakpoint-up($breakpoint) {
-        padding: $py 0;
-      }
-    } @else if $breakpoint == xs {
-      @include breakpoint-up($breakpoint) {
-        padding: $py 0;
-      }
-    } @else {
-      @include breakpoint-up($breakpoint) {
-        padding: $py $px;
-      }
     }
   }
 }
@@ -82,17 +60,4 @@
   } @else if $point == xl {
     @content;
   }
-}
-
-/* Center with margin */
-
-@mixin center-margin {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@mixin center-absolute {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

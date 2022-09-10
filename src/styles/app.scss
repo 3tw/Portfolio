@@ -1,12 +1,7 @@
 @charset 'UTF-8';
-
-// 1. Abstracts
 @import
   'abstracts/mixins',
-  'abstracts/variables';
-
-// 3. Base
-@import
+  'abstracts/variables',
   'base/base',
   'base/helpers',
   'base/typography';

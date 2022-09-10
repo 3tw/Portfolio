@@ -1,12 +1,15 @@
 <template>
   <div class="background-wrap">
-
     <!-- Dots -->
 
     <span
       @click="toggleDotState('dot-large')"
-      @click.once="startTextAnimation(); showCircleCount(); hideIndicators()"
-      :class=dotState
+      @click.once="
+        startTextAnimation();
+        showCircleCount();
+        hideIndicators();
+      "
+      :class="dotState"
       class="dot dot-large"
     ></span>
 
@@ -14,114 +17,107 @@
       <div class="dot-content">
         <span
           @click="toggleDotState('dot-small')"
-          :class=dotState
+          :class="dotState"
           class="dot dot-small"
         ></span>
-
       </div>
     </div>
 
     <!-- Message -->
 
-    <div
-      :class="[counterState, dotState]"
-      class="message message-1"
-    ><span>
-        {{ circleCountOrdinal }} time
-      </span>
+    <div :class="[counterState, dotState]" class="message message-1">
+      <span> {{ circleCountOrdinal }} time </span>
     </div>
-    <div
-      :class="[counterState, dotState]"
-      class="message message-2"
-    >
-      <span>
-        around the site
-      </span>
+    <div :class="[counterState, dotState]" class="message message-2">
+      <span> around the site </span>
     </div>
 
-    <!-- Inidicators -->
+    <!-- Indicators -->
 
     <indicator
       ref="indicator"
-      @indicator-clicked="startTextAnimation(); toggleDotState('dot-large'); showCircleCount()"
+      @indicator-clicked="
+        startTextAnimation();
+        toggleDotState('dot-large');
+        showCircleCount();
+      "
     />
-
   </div>
 </template>
 
 <script>
-import Indicator from './Indicator.vue'
+import Indicator from "./Indicator.vue";
 
 export default {
   components: {
     Indicator,
   },
-  name: 'Background',
+  name: "Background",
   data() {
     return {
-      dotState: 'initial-state',
-      counterState: 'hide-message',
+      dotState: "initial-state",
+      counterState: "hide-message",
       circleCount: 0,
-      circleCountOrdinal: '',
-    }
+      circleCountOrdinal: "",
+    };
   },
 
   methods: {
-    /* Dot state managment */
+    /* Dot state management */
     startTextAnimation() {
-      this.$emit('animation-started', true)
+      this.$emit("animation-started", true);
     },
     changeAnimationStatus(state) {
-      this.$emit('animation-status', state)
+      this.$emit("animation-status", state);
     },
     toggleDotState(dotSize) {
-      if (this.dotState === 'passive' || this.dotState === 'initial-state') {
-        this.dotState = 'active'
-        this.changeAnimationStatus('active')
-      } else if (this.dotState === 'active' && dotSize === 'dot-large') {
+      if (this.dotState === "passive" || this.dotState === "initial-state") {
+        this.dotState = "active";
+        this.changeAnimationStatus("active");
+      } else if (this.dotState === "active" && dotSize === "dot-large") {
       } else {
-        this.dotState = 'passive'
-        this.updateCircleCount()
-        this.changeAnimationStatus('passive')
+        this.dotState = "passive";
+        this.updateCircleCount();
+        this.changeAnimationStatus("passive");
       }
     },
 
     /* Circle count */
     updateCircleCount() {
-      this.circleCount++
-      window.localStorage.setItem('circleCount', this.circleCount)
-      this.getGetOrdinal(this.circleCount)
+      this.circleCount++;
+      window.localStorage.setItem("circleCount", this.circleCount);
+      this.getOrdinal(this.circleCount);
     },
     // Credits go to : https://gist.github.com/jlbruno/1535691/db35b4f3af3dcbb42babc01541410f291a8e8fac
-    getGetOrdinal(n) {
-      let suffix = ['th', 'st', 'nd', 'rd']
-      let v = n % 100
+    getOrdinal(n) {
+      let suffix = ["th", "st", "nd", "rd"];
+      let v = n % 100;
       this.circleCountOrdinal =
-        n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
+        n + (suffix[(v - 20) % 10] || suffix[v] || suffix[0]);
     },
     showCircleCount() {
-      this.counterState = ''
+      this.counterState = "";
     },
 
     /* Indicators */
     hideIndicators() {
-      this.$refs.indicator.hideIndicators()
+      this.$refs.indicator.hideIndicators();
     },
   },
   mounted: function () {
-    if (window.localStorage.getItem('circleCount')) {
-      this.circleCount = window.localStorage.getItem('circleCount')
-      this.circleCount++
-      this.getGetOrdinal(this.circleCount)
-      this.showCircleCount()
+    if (window.localStorage.getItem("circleCount")) {
+      this.circleCount = window.localStorage.getItem("circleCount");
+      this.circleCount++;
+      this.getOrdinal(this.circleCount);
+      this.showCircleCount();
     } else {
-      this.circleCount = 0
+      this.circleCount = 0;
     }
   },
-}
+};
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .background-wrap {
   position: absolute;
   overflow: hidden;
@@ -141,7 +137,9 @@ export default {
 
 .dot-large {
   position: fixed;
-  @include center-absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 0;
   width: 0;
   background-color: $bg-color;
@@ -183,7 +181,9 @@ export default {
 
 .dot-small {
   position: absolute;
-  @include center-absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 0;
   width: 0;
   border-width: 8px;
